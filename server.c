@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:37:33 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/24 21:07:00 by flfische         ###   ########.fr       */
+/*   Updated: 2024/04/24 21:22:39 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,29 @@ int	ft_handle_message(char c, t_message *message, siginfo_t *info)
 	return (0);
 }
 
+pid_t	ft_clientid_check(siginfo_t *info, t_message *message, int *i, char *c)
+{
+	static pid_t	clientid;
+
+	if (clientid != info->si_pid)
+	{
+		ft_bzero(message, sizeof(*message));
+		clientid = info->si_pid;
+		*i = 0;
+		*c = 0;
+	}
+	return (clientid);
+}
+
 void	ft_sig_handler(int signum, siginfo_t *info, void *context)
 {
 	static int			i;
 	static char			c;
-	int					is_end;
 	static t_message	message = {NULL, 0, 0};
 	static pid_t		clientid;
 
-	is_end = 0;
 	(void)context;
-	if (clientid != info->si_pid)
-	{
-		ft_bzero(&message, sizeof(message));
-		clientid = info->si_pid;
-		i = 0;
-		c = 0;
-	}
+	clientid = ft_clientid_check(info, &message, &i, &c);
 	if (signum == SIGINT)
 	{
 		if (message.str)
@@ -75,16 +81,14 @@ void	ft_sig_handler(int signum, siginfo_t *info, void *context)
 	}
 	if (signum == SIGUSR1)
 		c |= 1 << i;
-	i++;
-	if (i == 8)
+	if (++i == 8)
 	{
-		is_end = ft_handle_message(c, &message, info);
+		ft_handle_message(c, &message, info);
 		c = 0;
 		i = 0;
 	}
 	usleep(100);
-	if (!is_end)
-		kill(info->si_pid, SIGUSR2);
+	kill(info->si_pid, SIGUSR2);
 }
 
 int	main(void)

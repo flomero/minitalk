@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:37:51 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/24 20:53:11 by flfische         ###   ########.fr       */
+/*   Updated: 2024/04/24 21:15:20 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	ft_sig_handler(int signum, siginfo_t *info, void *context)
 		i++;
 	if (signum == SIGUSR1)
 	{
+		i++;
 		ft_printf("Whole message recieved. Bit count: %d\n", i);
 		i = 0;
 	}

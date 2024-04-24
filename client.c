@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:37:51 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/24 21:15:20 by flfische         ###   ########.fr       */
+/*   Updated: 2024/04/24 22:45:32 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	main(int argc, char **argv)
 	char				*message;
 	struct sigaction	sigac;
 
-	if (argc != 3 || !ft_stringall(argv[1], ft_isdigit))
+	if (argc != 3 || !ft_stringall(argv[1], ft_isdigit)
+		|| ft_strlen(argv[2]) == 0)
 	{
 		ft_printf("Error\nUsage: %s [PID] [message]\n", argv[0]);
 		return (1);

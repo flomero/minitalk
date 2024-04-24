@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:35:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/24 17:12:04 by flfische         ###   ########.fr       */
+/*   Updated: 2024/04/24 21:52:42 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_message
 	char	*str;
 	size_t	i;
 	size_t	len;
+	pid_t	clientid;
 }			t_message;
 
 #endif

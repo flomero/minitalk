@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:35:28 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/24 13:44:10 by flfische         ###   ########.fr       */
+/*   Updated: 2024/04/24 17:12:04 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <signal.h>
 # include <unistd.h>
 
-# define BUFFER 1024
+# define BUFFER 1000
 
 typedef struct s_message
 {

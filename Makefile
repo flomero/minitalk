@@ -8,6 +8,7 @@ OBJDIR := obj
 SERVER_OFILES := $(addprefix $(OBJDIR)/, $(SERVER_CFILES:.c=.o))
 CLIENT_OFILES := $(addprefix $(OBJDIR)/, $(CLIENT_CFILES:.c=.o))
 
+NAME := minitalk
 NAME_SERVER := server
 NAME_CLIENT := client
 
@@ -19,17 +20,21 @@ INC_DIR := .
 HEADER := minitalk.h
 HEADER := $(addprefix $(INC_DIR)/, $(HEADER))
 
-all: $(NAME_SERVER) $(NAME_CLIENT)
+all: $(NAME)
 
-$(NAME_SERVER): $(OBJDIR) $(SERVER_OFILES) $(LIBFT)
+$(NAME): $(NAME_SERVER) $(NAME_CLIENT)
+
+bonus: all
+
+$(NAME_SERVER): $(SERVER_OFILES) $(LIBFT)
 	@echo "$(YELLOW)Compiling server...$(NC)"
-	@$(CC) $(CFLAGS) -o $@ $(SERVER_OFILES) $(LIBFT_FLAGS)
+	$(CC) $(CFLAGS) -o $@ $(SERVER_OFILES) $(LIBFT_FLAGS)
 
-$(NAME_CLIENT): $(OBJDIR) $(CLIENT_OFILES) $(LIBFT)
+$(NAME_CLIENT): $(CLIENT_OFILES) $(LIBFT)
 	@echo "$(YELLOW)Compiling client...$(NC)"
-	@$(CC) $(CFLAGS) -o $@ $(CLIENT_OFILES) $(LIBFT_FLAGS)
+	$(CC) $(CFLAGS) -o $@ $(CLIENT_OFILES) $(LIBFT_FLAGS)
 
-$(OBJDIR)/%.o: %.c $(HEADER)
+$(OBJDIR)/%.o: %.c $(HEADER) | $(OBJDIR)
 	@echo "$(YELLOW)Compiling $<...$(NC)"
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -I. -I$(INC_DIR) -c $< -o $@
@@ -57,7 +62,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re norm
+.PHONY: all clean fclean re $(NAME)
 
 # colors:
 RED = \033[0;31m

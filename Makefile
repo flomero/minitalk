@@ -26,11 +26,11 @@ $(NAME): $(NAME_SERVER) $(NAME_CLIENT)
 
 bonus: all
 
-$(NAME_SERVER): $(SERVER_OFILES) $(LIBFT)
+$(NAME_SERVER): $(LIBFT) $(SERVER_OFILES)
 	@echo "$(YELLOW)Compiling server...$(NC)"
 	$(CC) $(CFLAGS) -o $@ $(SERVER_OFILES) $(LIBFT_FLAGS)
 
-$(NAME_CLIENT): $(CLIENT_OFILES) $(LIBFT)
+$(NAME_CLIENT): $(LIBFT) $(CLIENT_OFILES)
 	@echo "$(YELLOW)Compiling client...$(NC)"
 	$(CC) $(CFLAGS) -o $@ $(CLIENT_OFILES) $(LIBFT_FLAGS)
 
@@ -46,7 +46,7 @@ $(OBJDIR):
 $(LIBFT):
 	@echo "$(YELLOW)Compiling libft...$(NC)"
 	if [ ! -d $(LIBFT_DIR) ]; then mkdir -p $(LIBFT_DIR); fi
-	@git submodule update --init -q
+	@git submodule update --init --recursive
 	@$(MAKE) -C $(LIBFT_DIR)
 
 clean:

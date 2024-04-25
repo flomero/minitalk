@@ -46,7 +46,7 @@ $(OBJDIR):
 $(LIBFT):
 	@echo "$(YELLOW)Compiling libft...$(NC)"
 	if [ ! -d $(LIBFT_DIR) ]; then mkdir -p $(LIBFT_DIR); fi
-	@git submodule update --remote --init -q
+	@git submodule update --init -q
 	@$(MAKE) -C $(LIBFT_DIR)
 
 clean:

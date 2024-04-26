@@ -6,7 +6,7 @@
 /*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:37:33 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/24 22:00:27 by flfische         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:49:43 by flfische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	ft_handle_message(char c, t_message *message, siginfo_t *info)
 {
 	if (!message->str)
 	{
-		message->str = malloc(BUFFER_SIZE);
+		message->str = malloc(BUFFER);
 		if (!message->str)
 			ft_exit("Failed to allocate memory", 1);
-		message->len = BUFFER_SIZE;
+		message->len = BUFFER;
 		message->i = 0;
 	}
 	if (message->i == message->len - 1)
